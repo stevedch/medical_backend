@@ -25,5 +25,6 @@ class Ticket(models.Model):
     date_update = models.DateTimeField(null=True, )
 
     class Meta:
+        db_table = 'ticket'
         verbose_name = 'Ticket'
         verbose_name_plural = 'Tickets'
