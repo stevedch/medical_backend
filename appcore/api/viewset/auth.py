@@ -21,24 +21,21 @@ class AuthViewSet(ModelViewSet):
         data = request.data
 
         user = None
-        username = data.get('username')
-        password = data.get('password')
+        username = str(data.get('username'))
+        password = str(data.get('password'))
 
-        serializer = []
+        serializer = dict()
         response = dict(
-            status=status.HTTP_202_ACCEPTED,
+            status=status.HTTP_400_BAD_REQUEST,
             content_type='application/json',
             headers=self.get_success_headers([])
         )
 
         try:
             user = self.queryset.get(username=username)
-        except User.DoesNotExist:
-            serializer = dict(
-                message='El usuario %s ingresado no existe, por favor contáctese con el'
-                        ' administrador del sitio.' % username,
-                data=None
-            )
+        except User.DoesNotExist as e:
+            serializer = dict(message='El usuario %s ingresado no existe, por favor contáctese con el'
+                                      ' administrador del sitio.' % username, data=None)
 
         if user is not None:
             user_auth = authenticate(username=username, password=password)
@@ -68,5 +65,4 @@ class AuthViewSet(ModelViewSet):
                     message='El usuario o contraseña son incorrectos',
                     data=None
                 )
-
         return Response(serializer, **response)

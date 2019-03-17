@@ -36,12 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'appcore'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -134,3 +136,7 @@ LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_REDIRECT_URL = '/api/'
 
 AUTH_USER_MODEL = 'appcore.User'
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080'
+)
