@@ -1,2 +1,7 @@
-user: root
-password: admin.2018
+-- USUARIO ADMINISTRADOR
+    user: root
+    password: admin.2018
+
+-- USUARIO ESTÁNDAR
+    user: root.2
+    password: admin.2019

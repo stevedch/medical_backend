@@ -7,7 +7,7 @@ from appcore.models import Ticket
 class TicketCreationForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ('title', 'description',)
+        fields = ('title', 'description', 'status',)
 
     def save(self, commit=True):
         ticket = super(TicketCreationForm, self).save(commit=False)
@@ -21,7 +21,7 @@ class Admin(admin.ModelAdmin):
     add_form_template = 'admin/ticket/add_form.html'
     add_form = TicketCreationForm
 
-    fields = ('title', 'description',)
+    fields = ('title', 'description', 'status',)
     list_display = ('title', 'description', 'status', 'user', 'date_created',)
 
     def get_form(self, request, obj=None, **kwargs):
