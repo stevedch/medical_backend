@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -65,4 +65,25 @@ class AuthViewSet(ModelViewSet):
                     message='El usuario o contraseña son incorrectos',
                     data=None
                 )
+        return Response(serializer, **response)
+
+    @action(methods=['POST', ], detail=False, url_path='logout')
+    def logout(self, request, *args, **kwargs):
+        serializer = dict()
+        response = dict(
+            status=status.HTTP_400_BAD_REQUEST,
+            content_type='application/json',
+            headers=self.get_success_headers([])
+        )
+        try:
+            logout(request)
+            serializer = dict()
+            response = dict(
+                status=status.HTTP_202_ACCEPTED,
+                content_type='application/json',
+                headers=self.get_success_headers(serializer)
+            )
+        except Exception as e:
+            pass
+
         return Response(serializer, **response)

@@ -6,6 +6,7 @@ from appcore.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()
+    role = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -20,3 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
         except Token.DoesNotExist:
             pass
         return key_token
+
+    @staticmethod
+    def get_role(user):
+        role = None
+        try:
+            role = user.role.name
+        except Exception:
+            pass
+        return role
