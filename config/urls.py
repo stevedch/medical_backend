@@ -17,13 +17,18 @@ from django.conf.urls import url, include
 from django.contrib.auth.views import LoginView, LogoutView
 from rest_framework import routers
 from appcore.api.viewset.ticket import TicketViewSet
+from appcore.api.viewset.auth import AuthViewSet
 
 router = routers.DefaultRouter()
 router.register(r'ticket', TicketViewSet)
+router.register(r'auth', AuthViewSet)
 
 urlpatterns = [
-    # API RESTFRAMEWORK
-    url('^api/', include(router.urls)),
+
+    # AUTH
     url(r'^$', LoginView.as_view(template_name='auth/login.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
+
+    # API RESTFRAMEWORK
+    url('^api/', include(router.urls)),
 ]
