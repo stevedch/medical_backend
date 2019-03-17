@@ -19,4 +19,4 @@ class UserSerializer(serializers.ModelSerializer):
             key_token = Token.objects.get(user=user).key
         except Token.DoesNotExist:
             pass
-        return 'Token {}'.format(key_token)
+        return key_token
