@@ -12,9 +12,9 @@ class TicketViewSet(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         data = request.data
-        title = str(data.get('title'))
-        description = str(data.get('description'))
-        user_id = str(data.get('user_id'))
+        title = data.get('title')
+        description = data.get('description')
+        user_id = data.get('user_id')
 
         serializer = dict()
         headers = dict()
