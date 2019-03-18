@@ -17,4 +17,9 @@ class TicketSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_user(ticket):
-        return ticket.user.username
+        username = None
+        try:
+            username = ticket.user.username
+        except Exception:
+            pass
+        return (username is None) and 'Usuario no asignado' or username
