@@ -1,4 +1,4 @@
-# Requisitos de Instalación Generales
+# Instalación General
 
 * __Instalación de Python 2.7__
 
